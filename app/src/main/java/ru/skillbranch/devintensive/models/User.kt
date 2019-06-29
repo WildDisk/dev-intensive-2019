@@ -22,6 +22,27 @@ data class User(
 
     constructor(id: String) : this(id, "John", "Doe")
 
+    data class Builder(
+        protected var id: String? = null,
+        protected var firstName: String? = null,
+        protected var lastName: String? = null,
+        protected var avatar: String? = null,
+        protected var rating: Int = 0,
+        protected var respect: Int = 0,
+        protected var lastVisit: Date? = null,
+        protected var isOnline: Boolean = false
+    ) {
+        fun id(id: String) = apply { this.id = id }
+        fun firstName(firstName: String) = apply { this.firstName = firstName }
+        fun lastName(lastName: String) = apply { this.lastName = lastName }
+        fun avatar(avatar: String) = apply { this.avatar = avatar }
+        fun rating(rating: Int) = apply { this.rating = rating }
+        fun respect(respect: Int) = apply { this.respect = respect }
+        fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
+        fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
+        fun build() = User(id.toString(),firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
+    }
+
     init {
         println(
             "It's Alive!!! \n" +

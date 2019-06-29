@@ -28,8 +28,6 @@ class ExampleUnitTest {
 
     @Test
     fun tet_factory() {
-//        val user = User.makeUser("John Cena")
-//        val user2 = User.makeUser("John Wick")
         val user3 = User.makeUser("John Silerhand")
         val user4 = user3.copy(id = "2", lastName = "Cena", lastVisit = Date())
 
@@ -81,5 +79,20 @@ class ExampleUnitTest {
 
         println(textMessage.formatMessage())
         println(imageMessage.formatMessage())
+    }
+
+    @Test
+    fun test_builder() {
+        val user = User.Builder()
+            .id("123")
+            .firstName("Жосасын")
+            .lastName("Бздын")
+            .avatar("picture")
+            .rating(10)
+            .respect(999)
+            .lastVisit(Date().add(-50,TimeUnits.MINUTE))
+            .build()
+
+        println(user)
     }
 }

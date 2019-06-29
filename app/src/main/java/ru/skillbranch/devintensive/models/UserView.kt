@@ -12,8 +12,8 @@ class UserView(
         println("""
             id: $id: 
             fullName: $fullName: 
-            nickname: $nickname: 
             avatar: $avatar: 
+            nickname: $nickname: 
             status: $status: 
             initials: $initials: 
         """.trimIndent()
