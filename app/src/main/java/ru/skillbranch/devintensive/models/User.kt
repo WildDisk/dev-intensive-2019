@@ -7,10 +7,10 @@ data class User(
     val id: String,
     var firstName: String?,
     var lastName: String?,
-    var avatar: String?,
+    var avatar: String? = null,
     var rating: Int = 0,
     var respect: Int = 0,
-    val lastVisit: Date? = null,
+    var lastVisit: Date? = null,
     val isOnline: Boolean = false
 ) {
     constructor(id: String, firstName: String?, lastName: String?) : this(
@@ -35,10 +35,10 @@ data class User(
         fun id(id: String) = apply { this.id = id }
         fun firstName(firstName: String) = apply { this.firstName = firstName }
         fun lastName(lastName: String) = apply { this.lastName = lastName }
-        fun avatar(avatar: String) = apply { this.avatar = avatar }
+        fun avatar(avatar: String?) = apply { this.avatar = avatar }
         fun rating(rating: Int) = apply { this.rating = rating }
         fun respect(respect: Int) = apply { this.respect = respect }
-        fun lastVisit(lastVisit: Date) = apply { this.lastVisit = lastVisit }
+        fun lastVisit(lastVisit: Date?) = apply { this.lastVisit = lastVisit }
         fun isOnline(isOnline: Boolean) = apply { this.isOnline = isOnline }
         fun build() = User(id.toString(),firstName, lastName, avatar, rating, respect, lastVisit, isOnline)
     }
@@ -75,7 +75,7 @@ data class User(
             rating: $rating
             respect: $respect
             lastVisit: $lastVisit
-            isOnline: $isOnline: 
+            isOnline: $isOnline 
         """.trimIndent()
     )
 }

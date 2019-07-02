@@ -2,12 +2,13 @@ package ru.skillbranch.devintensive.models
 
 import java.util.*
 
-abstract class BaseMessagge(
+abstract class BaseMessage(
     val id: String,
     val from: User?,
     val chat: Chat,
     val isIncoming: Boolean = false,
-    val date: Date = Date()
+    val date: Date = Date(),
+    val isOnline: Boolean? = false
 ) {
     abstract fun formatMessage(): String
 
@@ -18,8 +19,9 @@ abstract class BaseMessagge(
             chat: Chat,
             date: Date = Date(),
             type: String = "text",
-            payload: Any?
-        ): BaseMessagge {
+            payload: Any?,
+            isOnline: Boolean? = false
+        ): BaseMessage {
             lastId++
             return when (type) {
                 "image" -> ImageMessage("$lastId", from, chat, date = date, image = payload as String)
