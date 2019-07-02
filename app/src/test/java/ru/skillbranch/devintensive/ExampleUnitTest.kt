@@ -61,25 +61,25 @@ class ExampleUnitTest {
         """.trimIndent())
     }
 
-//    @Test
-//    fun test_data_mapping() {
-//        val user = User.makeUser("Романов Иван")
-//        val newUser = user.copy(lastVisit = Date().add(-7, TimeUnits.SECOND))
-//        println(newUser)
-//
-//        val userView = newUser.toUserView()
-//        userView.printMe()
-//    }
+    @Test
+    fun test_data_mapping() {
+        val user = User.makeUser("Романов Иван")
+        val newUser = user.copy(lastVisit = Date().add(-7, TimeUnits.SECOND))
+        println(newUser)
 
-//    @Test
-//    fun test_abstract_factory() {
-//        val user = User.makeUser("Романов Иван")
-//        val textMessage = BaseMessagge.makeMessage(user, Chat("0"), payload = "any text message", type = "text")
-//        val imageMessage = BaseMessagge.makeMessage(user, Chat("0"), payload = "any image url", type = "image")
-//
-//        println(textMessage.formatMessage())
-//        println(imageMessage.formatMessage())
-//    }
+        val userView = newUser.toUserView()
+        userView.printMe()
+    }
+
+    @Test
+    fun test_abstract_factory() {
+        val user = User.makeUser("Романов Иван")
+        val textMessage = BaseMessagge.makeMessage(user, Chat("0"), payload = "any text message", type = "text")
+        val imageMessage = BaseMessagge.makeMessage(user, Chat("0"), payload = "any image url", type = "image")
+
+        println(textMessage.formatMessage())
+        println(imageMessage.formatMessage())
+    }
 
     @Test
     fun test_builder() {
