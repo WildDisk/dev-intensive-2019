@@ -49,7 +49,7 @@ object Utils {
         map["ц"] = "c"; map["Ц"] = "C"
         map["ч"] = "ch"; map["Ч"] = "Ch"
         map["ш"] = "sh"; map["Ш"] = "Sh"
-        map["щ"] = "sh"; map["Щ"] = "Sh"
+        map["щ"] = "sh'"; map["Щ"] = "Sh'"
         map["ъ"] = ""; map["Ъ"] = ""
         map["ы"] = "i"; map["Ы"] = "I"
         map["ь"] = ""; map["Ь"] = ""

@@ -4,9 +4,7 @@ import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Test
 
 import org.junit.Assert.*
-import ru.skillbranch.devintensive.extensions.TimeUnits
-import ru.skillbranch.devintensive.extensions.add
-import ru.skillbranch.devintensive.extensions.toUserView
+import ru.skillbranch.devintensive.extensions.*
 import ru.skillbranch.devintensive.models.*
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
@@ -61,6 +59,7 @@ class ExampleUnitTest {
      */
     @Test
     fun test_fullNameParsing() {
+        var firstName = "John"
         assertEquals(null to null, Utils.parseFullName(null))
         assertEquals(null to null, Utils.parseFullName(""))
         assertEquals(null to null, Utils.parseFullName(" "))
@@ -68,7 +67,7 @@ class ExampleUnitTest {
         assertEquals(null to "Wick", Utils.parseFullName(" Wick"))
         assertEquals("John" to null, Utils.parseFullName("John"))
         assertEquals("John" to "Wick", Utils.parseFullName("John Wick"))
-        assertEquals("John" to "Wick", Utils.parseFullName("John  Wick"))
+        assertEquals("John" to "Wick", Utils.parseFullName("John     Wick"))
     }
 
     /**
@@ -188,35 +187,35 @@ class ExampleUnitTest {
      *      Date().add(-400, TimeUnits.DAY).humanizeDiff() //более года назад
      *      Date().add(400, TimeUnits.DAY).humanizeDiff() //более чем через год
      */
-//    @Test
-//    fun test_humanizeDiff() {
-//        assertEquals("2 часа назад", Date().add(-2, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("5 дней назад", Date().add(-5, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("через 2 минуты", Date().add(2, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("через 7 дней", Date().add(7, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("более года назад", Date().add(-400, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("более чем через год", Date().add(400, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("только что", Date().add(-1, TimeUnits.SECOND).humanizeDiff())
-//        assertEquals("несколько секунд назад", Date().add(-45, TimeUnits.SECOND).humanizeDiff())
-//        assertEquals("минуту назад", Date().add(-46, TimeUnits.SECOND).humanizeDiff())
-//        assertEquals("1 минуту назад", Date().add(-76, TimeUnits.SECOND).humanizeDiff())
-//        assertEquals("минуту назад", Date().add(-1, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("2 минуты назад", Date().add(-2, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("3 минуты назад", Date().add(-3, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("45 минут назад", Date().add(-45, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("час назад", Date().add(-1, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("1 час назад", Date().add(-76, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("2 часа назад", Date().add(-120, TimeUnits.MINUTE).humanizeDiff())
-//        assertEquals("3 часа назад", Date().add(-3, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("4 часа назад", Date().add(-4, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("5 часов назад", Date().add(-5, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("день назад", Date().add(-26, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("1 день назад", Date().add(-27, TimeUnits.HOUR).humanizeDiff())
-//        assertEquals("4 дня назад", Date().add(-4, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("5 дней назад", Date().add(-5, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("360 дней назад", Date().add(-360, TimeUnits.DAY).humanizeDiff())
-//        assertEquals("более года назад", Date().add(-361, TimeUnits.DAY).humanizeDiff())
-//    }
+    @Test
+    fun test_humanizeDiff() {
+        assertEquals("2 часа назад", Date().add(-2, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("5 дней назад", Date().add(-5, TimeUnits.DAY).humanizeDiff())
+        assertEquals("через 2 минуты", Date().add(2, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("через 7 дней", Date().add(7, TimeUnits.DAY).humanizeDiff())
+        assertEquals("более года назад", Date().add(-400, TimeUnits.DAY).humanizeDiff())
+        assertEquals("более чем через год", Date().add(400, TimeUnits.DAY).humanizeDiff())
+        assertEquals("только что", Date().add(-1, TimeUnits.SECOND).humanizeDiff())
+        assertEquals("несколько секунд назад", Date().add(-45, TimeUnits.SECOND).humanizeDiff())
+        assertEquals("минуту назад", Date().add(-46, TimeUnits.SECOND).humanizeDiff())
+        assertEquals("1 минуту назад", Date().add(-76, TimeUnits.SECOND).humanizeDiff())
+        assertEquals("минуту назад", Date().add(-1, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("2 минуты назад", Date().add(-2, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("3 минуты назад", Date().add(-3, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("45 минут назад", Date().add(-45, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("час назад", Date().add(-1, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("1 час назад", Date().add(-76, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("2 часа назад", Date().add(-120, TimeUnits.MINUTE).humanizeDiff())
+        assertEquals("3 часа назад", Date().add(-3, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("4 часа назад", Date().add(-4, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("5 часов назад", Date().add(-5, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("день назад", Date().add(-26, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("1 день назад", Date().add(-27, TimeUnits.HOUR).humanizeDiff())
+        assertEquals("4 дня назад", Date().add(-4, TimeUnits.DAY).humanizeDiff())
+        assertEquals("5 дней назад", Date().add(-5, TimeUnits.DAY).humanizeDiff())
+        assertEquals("360 дней назад", Date().add(-360, TimeUnits.DAY).humanizeDiff())
+        assertEquals("более года назад", Date().add(-361, TimeUnits.DAY).humanizeDiff())
+    }
 
     /**
      * Необходимо создать абстрактный класс BaseMessage содержащий сделующие свойства:
@@ -253,5 +252,13 @@ class ExampleUnitTest {
 //        assertEquals("id:0 Василий отправил сообщение \"any text message\" только что", textMessage.formatMessage())
 //        assertEquals("id:1 Василий получил изображение \"https://anyurl.com\" 2 часа назад", imageMessage.formatMessage())
 //    }
-}
 
+    @Test
+    fun test_truncate() {
+        assertEquals("123456...", "123456789".truncate(6))
+        assertEquals("123456789", "123456789".truncate(9))
+        assertEquals("Bender Bending R...", "Bender Bending Rodrigez".truncate(16))
+        assertEquals("Bender Bending...", "Bender Bending Rodrigez".truncate(15))
+        assertEquals("1", "1   ".truncate(3))
+    }
+}
