@@ -3,14 +3,16 @@ package ru.skillbranch.devintensive
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.skillbranch.devintensive.extensions.hideKeyboard
+import ru.skillbranch.devintensive.extensions.isKeyboardClosed
 import ru.skillbranch.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -36,14 +38,34 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
         benderObj = Bender(Bender.Status.valueOf(status), Bender.Question.valueOf(question))
 
-        val(r,g,b) = benderObj.status.color
-        benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
+        val (r, g, b) = benderObj.status.color
+        benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
 
         Log.d("M_MainActivity", "onCreate $status $question")
 
         textTxt.text = benderObj.askQuestion()
 
         sendBtn.setOnClickListener(this)
+
+        messageEt.setOnEditorActionListener { _, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
+                    messageEt.setText("")
+                    val (r, g, b) = color
+                    benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+                    textTxt.text = phrase
+                    isKeyboardClosed()
+                    hideKeyboard()
+                    true
+                }
+                else -> {
+                    isKeyboardClosed()
+                    hideKeyboard()
+                    false
+                }
+            }
+        }
     }
 
     override fun onRestart() {
@@ -72,11 +94,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        if(v?.id == R.id.iv_send) {
+        if (v?.id == R.id.iv_send) {
             val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
             messageEt.setText("")
-            val(r,g,b) = color
-            benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
+            val (r, g, b) = color
+            benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
             textTxt.text = phrase
         }
     }
