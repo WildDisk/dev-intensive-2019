@@ -2,6 +2,7 @@ package ru.skillbranch.devintensive.extensions
 
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
@@ -26,9 +27,25 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND): Date {
 }
 
 fun Date.humanizeDiff(date: Date = Date()): String {
-//    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    return ""
+    //    TODOs("not implemented") //To change body of created functions use File | Settings | File Templates.
+    val tmp = this.time
+    this.time = tmp
+    var time = Date().add(2, TimeUnits.SECOND).time - date.time
+    print(time)
+    return this.toString()
 }
+
+private fun plurals(value: Long): Long {
+    var n = when(value) {
+        0L -> 0L
+        else -> 5L
+    }
+    abs(n) % 100
+    return 0L
+}
+
+
+
 
 enum class TimeUnits {
     SECOND,
